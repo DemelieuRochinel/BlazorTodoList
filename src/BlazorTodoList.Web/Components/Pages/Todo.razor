@@ -1,3 +1,24 @@
 ﻿@page "/Todo"
+@rendermode InteractiveServer
 
-<h1>todo list application</h1>
+<PageTitel>Todo</PageTitel>
+
+<h3>Todo List for notes</h3>
+
+<ul>
+    @foreach(var todo in todos)
+    {
+        <li>todo.Titel</li>
+    }
+</ul>
+
+<input placeholder="what task are going to work on? " />
+<button>Add todo</button>
+
+
+
+@code{
+
+    private List<TodoItem> todos = [];
+
+}
