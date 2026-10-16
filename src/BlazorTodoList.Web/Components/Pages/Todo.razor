@@ -3,22 +3,34 @@
 
 <PageTitel>Todo</PageTitel>
 
-<h3>Todo List for notes</h3>
+<h3>Todo (@todos.Count(todo => !todo.IsDone)) </h3>
 
 <ul>
     @foreach(var todo in todos)
     {
-        <li>todo.Titel</li>
+        <li>
+            <input type="checkbox" @bind="todo.IsDone"/>
+            <input @bind="todo.Title"/>
+        </li>
     }
 </ul>
 
-<input placeholder="what task are going to work on? " />
-<button>Add todo</button>
-
-
-
+<input placeholder="Enter a task to do:  "  style="padding:2px" @bind="newTodo"/>
+<button style="cursor:pointer; border-radius:5px; background: green; color: white" @onclick="AddTodo">Add todo</button>
+ 
 @code{
 
     private List<TodoItem> todos = [];
+    private string? newTodo;
+
+    private void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
+        
+    }
 
 }
